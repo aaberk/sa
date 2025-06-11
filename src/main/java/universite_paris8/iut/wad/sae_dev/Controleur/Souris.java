@@ -31,12 +31,8 @@ public class Souris implements EventHandler<MouseEvent> {
             double clicX = event.getX();
             double clicY = event.getY();
 
-            if (clicX > 10 && clicX < 46 && clicY > 10 && clicY < 46 && inventaireVue.estFerme()) {
-                System.out.println("clic inventaire");
-                inventaireVue.ouvrirContenu();
+            if (inventaireVue.gererClicInventaire(clicX, clicY)) {
                 return;
-            } else if (clicX > 10 && clicX < 46 && clicY > 10 && clicY < 46 ) {
-                inventaireVue.fermerContenue();
             }
 
             int tailleTuile = terrain.getTailleTuile();

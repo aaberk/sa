@@ -1,14 +1,14 @@
-// Cette classe crée et affiche le joueur à l'écran en héritant de PersonneVue.
+// Cette classe crée et affiche les PNJ à l'écran en héritant de PersonneVue.
 package universite_paris8.iut.wad.sae_dev.Vue;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.wad.sae_dev.Modele.Joueur;
+import universite_paris8.iut.wad.sae_dev.Modele.Pnj;
 
-public class JoueurVue extends PersonnageVue {
+public class PnjVue extends PersonnageVue {
 
-    public JoueurVue(Joueur joueur, Pane pane) {
-        super(joueur, pane);
+    public PnjVue(Pnj pnj, Pane pane) {
+        super(pnj, pane);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class JoueurVue extends PersonnageVue {
         this.imageImmobileD = new Image(getClass().getResource(chemin + "joueurI.png").toExternalForm());
     }
 
-    public void joueurMort() {
+    public void pnjMort() {
         personneMort();
     }
 }

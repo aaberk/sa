@@ -19,11 +19,30 @@ public class InventaireVue {
     private final int APPARITIONITEM = (TAILLECASE - TAILLEITEM)/2;
     private boolean fermer;
 
+    private final double HITBOX_X_MIN = 10;
+    private final double HITBOX_X_MAX = 56;
+    private final double HITBOX_Y_MIN = 10;
+    private final double HITBOX_Y_MAX = 56;
+
+    private final Image imageSac;
+    private final Image imageCookie;
+    private final Image imagePelouse;
+    private final Image imageBrownie;
+    private final Image imageInventaireVide;
+
     public InventaireVue(Pane pane, Inventaire inventaire, Pane paneInventaire) {
         fermer = true;
         this.pane = pane;
         this.inventaire = inventaire;
         this.paneInventaire = paneInventaire;
+
+        // Chargement des images une seule fois
+        this.imageSac = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/ciel1.png").toExternalForm());
+        this.imageCookie = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/cookie.png").toExternalForm());
+        this.imagePelouse = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/pelouse.png").toExternalForm());
+        this.imageBrownie = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/terre.png").toExternalForm());
+        this.imageInventaireVide = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/ciel1.png").toExternalForm());
+
         afficherInventaire();
     }
 
@@ -31,9 +50,28 @@ public class InventaireVue {
         return fermer;
     }
 
+
+    public boolean estDansHitbox(double clicX, double clicY) {
+        return clicX >= HITBOX_X_MIN && clicX <= HITBOX_X_MAX &&
+                clicY >= HITBOX_Y_MIN && clicY <= HITBOX_Y_MAX;
+    }
+
+
+    public boolean gererClicInventaire(double clicX, double clicY) {
+        if (estDansHitbox(clicX, clicY)) {
+            if (estFerme()) {
+                System.out.println("clic inventaire");
+                ouvrirContenu();
+            } else {
+                fermerContenue();
+            }
+            return true;
+        }
+        return false;
+    }
+
     private void afficherInventaire() {
-        Image sac = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/ciel1.png").toExternalForm());
-        ImageView sacView = new ImageView(sac);
+        ImageView sacView = new ImageView(imageSac);
         sacView.setFitHeight(46);
         sacView.setFitWidth(46);
         sacView.setTranslateX(10);
@@ -44,11 +82,6 @@ public class InventaireVue {
     public void afficherContenu() {
         fermer = false;
         paneInventaire.getChildren().clear();
-
-        Image cookie = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/cookie.png").toExternalForm());
-        Image pelouse = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/pelouse.png").toExternalForm());
-        Image brownie = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/terre.png").toExternalForm());
-        Image inventaireVide = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/ciel1.png").toExternalForm());
 
         int x = 200;
         int y = 40;
@@ -61,7 +94,7 @@ public class InventaireVue {
                 y = y + TAILLECASE;
             }
 
-            ImageView inventaireVideVue = new ImageView(inventaireVide);
+            ImageView inventaireVideVue = new ImageView(imageInventaireVide);
             inventaireVideVue.setFitHeight(TAILLECASE);
             inventaireVideVue.setFitWidth(TAILLECASE);
             inventaireVideVue.setTranslateY(y);
@@ -71,13 +104,13 @@ public class InventaireVue {
             ImageView img = new ImageView();
             switch (type) {
                 case COOKIE:
-                    img = new ImageView(cookie);
+                    img = new ImageView(imageCookie);
                     break;
                 case PELOUSE:
-                    img = new ImageView(pelouse);
+                    img = new ImageView(imagePelouse);
                     break;
                 case BROWNIE:
-                    img = new ImageView(brownie);
+                    img = new ImageView(imageBrownie);
                     break;
             }
 
@@ -99,7 +132,7 @@ public class InventaireVue {
         }
 
         while (x < 500) {
-            ImageView inventaireVideVue = new ImageView(inventaireVide);
+            ImageView inventaireVideVue = new ImageView(imageInventaireVide);
             inventaireVideVue.setFitHeight(TAILLECASE);
             inventaireVideVue.setFitWidth(TAILLECASE);
             inventaireVideVue.setTranslateY(y);
@@ -125,5 +158,4 @@ public class InventaireVue {
             afficherContenu();
         }
     }
-
 }

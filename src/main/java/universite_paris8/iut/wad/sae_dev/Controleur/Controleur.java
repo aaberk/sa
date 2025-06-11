@@ -21,6 +21,7 @@ import universite_paris8.iut.wad.sae_dev.Modele.Pnj;
 import universite_paris8.iut.wad.sae_dev.Modele.Terrain;
 import universite_paris8.iut.wad.sae_dev.Vue.InventaireVue;
 import universite_paris8.iut.wad.sae_dev.Vue.JoueurVue;
+import universite_paris8.iut.wad.sae_dev.Vue.PnjVue;
 import universite_paris8.iut.wad.sae_dev.Vue.TerrainVue;
 import universite_paris8.iut.wad.sae_dev.Vue.VieVue;
 
@@ -45,6 +46,7 @@ public class Controleur implements Initializable {
     private Joueur joueur;
     private Pnj pnj;
     private JoueurVue joueurVue;
+    private PnjVue pnjVue;
 
     private VieVue barreDeVieVue;
 
@@ -75,7 +77,9 @@ public class Controleur implements Initializable {
 
         souris = new Souris(inventaireVue, terrainVue, terrain, joueur, inventaire);
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
+
         pnj = new Pnj(200, 300, terrain);
+        pnjVue = new PnjVue(pnj, pane);
 
         initAnimation();
         gameLoop.play();
