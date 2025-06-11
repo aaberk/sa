@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.effect.DropShadow?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.wad.sae_dev.Controleur.Menu">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fondRegles.png" />
+         </image>
+      </ImageView>
+       <Label fx:id="titre" alignment="CENTER" contentDisplay="CENTER" layoutX="280.0" text="Règles du jeu" textAlignment="CENTER" BorderPane.alignment="CENTER">
+           <font>
+               <Font name="Javanese Text" size="50.0" />
+           </font>
+           <textFill>
+               <LinearGradient endX="0.5" endY="1.0">
+                   <stops>
+                       <Stop color="#ff9999" offset="0.0" />
+                       <Stop color="#cc0000" offset="1.0" />
+                   </stops>
+               </LinearGradient>
+           </textFill>
+           <effect>
+               <DropShadow color="#8b0000" offsetX="3.0" offsetY="3.0" radius="5.0" />
+           </effect>
+       </Label>
+      <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onAction="#retournerMenu" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #d76f81; -fx-background-color: #f6dede;" text="Retourner au menu" textFill="#c95151" />
+   </children>
+</Pane>
