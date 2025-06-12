@@ -1,6 +1,5 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
-
 public class Pnj extends Personnage {
 
     private int compteurMouvement = 0;
@@ -13,10 +12,10 @@ public class Pnj extends Personnage {
 
     @Override
     public void seDeplacer() {
-        boolean collisionGauche = terrain.collision(getX() - vitesse, getY() + hauteur);
-        boolean collisionDroite = terrain.collision(getX() + largeur + vitesse, getY() + hauteur);
-        boolean bordGauche = (getX() - vitesse) < 0;
-        boolean bordDroit = (getX() + largeur + vitesse) >= terrain.getLargeurPixels();
+        boolean collisionGauche = getTerrain().collision(getX() - getVitesse(), getY() + getHauteur());
+        boolean collisionDroite = getTerrain().collision(getX() + getLargeur() + getVitesse(), getY() + getHauteur());
+        boolean bordGauche = (getX() - getVitesse()) < 0;
+        boolean bordDroit = (getX() + getLargeur() + getVitesse()) >= getTerrain().getLargeurPixels();
 
         if ((getDirection() == -1 && (collisionGauche || bordGauche)) ||
                 (getDirection() == 1 && (collisionDroite || bordDroit))) {

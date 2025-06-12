@@ -3,25 +3,19 @@ package universite_paris8.iut.wad.sae_dev.Modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-
 public abstract class Personnage {
-        protected IntegerProperty x = new SimpleIntegerProperty();
-        protected IntegerProperty y = new SimpleIntegerProperty();
-
-        protected IntegerProperty direction = new SimpleIntegerProperty(0);
-
-        protected int largeur;
-        protected int hauteur;
-        protected int vitesse;
-
-        protected Terrain terrain;
-
-        protected IntegerProperty vie = new SimpleIntegerProperty();
-        protected int vieMax;
-
-        protected boolean dansLesAirs = false;
-        protected final double GRAVITE = 0.6;
-        protected double velociteY = 0;
+        private IntegerProperty x = new SimpleIntegerProperty();
+        private IntegerProperty y = new SimpleIntegerProperty();
+        private IntegerProperty direction = new SimpleIntegerProperty(0);
+        private int largeur;
+        private int hauteur;
+        private int vitesse;
+        private Terrain terrain;
+        private IntegerProperty vie = new SimpleIntegerProperty();
+        private int vieMax;
+        private boolean dansLesAirs = false;
+        private final double GRAVITE = 0.6;
+        private double velociteY = 0;
 
         public Personnage(int x, int y, int largeur, int hauteur, int vitesse, int vieMax, Terrain terrain) {
                 this.x.set(x);
@@ -76,6 +70,42 @@ public abstract class Personnage {
 
         public void setDirection(int direction) {
                 this.direction.set(direction);
+        }
+
+        public int getLargeur() {
+                return largeur;
+        }
+
+        public int getHauteur() {
+                return hauteur;
+        }
+
+        public int getVitesse() {
+                return vitesse;
+        }
+
+        public Terrain getTerrain() {
+                return terrain;
+        }
+
+        public boolean isDansLesAirs() {
+                return dansLesAirs;
+        }
+
+        public void setDansLesAirs(boolean dansLesAirs) {
+                this.dansLesAirs = dansLesAirs;
+        }
+
+        public double getVelociteY() {
+                return velociteY;
+        }
+
+        public void setVelociteY(double velociteY) {
+                this.velociteY = velociteY;
+        }
+
+        public double getGravite() {
+                return GRAVITE;
         }
 
         public void deplacerGauche() {

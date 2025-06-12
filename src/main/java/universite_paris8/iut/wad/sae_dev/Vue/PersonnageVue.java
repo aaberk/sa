@@ -7,11 +7,11 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.wad.sae_dev.Modele.Personnage;
 
 public abstract class PersonnageVue {
-    protected Personnage personnage;
-    protected Pane pane;
-    protected ImageView personneView;
-    protected Image imageD, imageG, imageImmobileG, imageImmobileD;
-    protected boolean derniereDirectionGauche = false;
+    private Personnage personnage;
+    private Pane pane;
+    private ImageView personneView;
+    public Image imageD, imageG, imageImmobileG, imageImmobileD;
+    private boolean derniereDirectionGauche = false;
 
     public PersonnageVue(Personnage personnage, Pane pane) {
         this.personnage = personnage;
@@ -26,32 +26,35 @@ public abstract class PersonnageVue {
         pane.getChildren().add(personneView);
     }
 
-    protected abstract void chargerImages();
+    public abstract void chargerImages();
 
-    protected void lierPosition() {
+    private void lierPosition() {
         personneView.translateXProperty().bind(personnage.xProperty());
         personneView.translateYProperty().bind(personnage.yProperty());
     }
 
-    protected void detecterDirection() {
+    private void detecterDirection() {
         personnage.directionProperty().addListener((obs, oldVal, newVal) -> {
             changerImage(newVal.intValue());
         });
     }
 
-    protected void changerImage(int direction) {
+    private void changerImage(int direction) {
         if (direction == 0) {
             // Immobile - utilise la dernière direction mémorisée
             if (derniereDirectionGauche) {
                 personneView.setImage(imageImmobileG);
-            } else {
+            }
+            else {
                 personneView.setImage(imageImmobileD);
             }
-        } else if (direction == 1) {
+        }
+        else if (direction == 1) {
             // Droite
             personneView.setImage(imageD);
             derniereDirectionGauche = false;
-        } else if (direction == -1) {
+        }
+        else if (direction == -1) {
             // Gauche
             personneView.setImage(imageG);
             derniereDirectionGauche = true;
@@ -62,7 +65,8 @@ public abstract class PersonnageVue {
         if (versGauche) {
             personneView.setImage(imageImmobileG);
             derniereDirectionGauche = true;
-        } else {
+        }
+        else {
             personneView.setImage(imageImmobileD);
             derniereDirectionGauche = false;
         }

@@ -1,9 +1,5 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
-/**
- * Cette classe représente un joueur et hérite de Personnage.
- * Elle ajoute des fonctionnalités spécifiques au joueur comme le saut et la sélection de blocs.
- */
 public class Joueur extends Personnage {
 
     private final double FORCE_SAUT = -10.0;
@@ -24,11 +20,11 @@ public class Joueur extends Personnage {
     }
 
     public void saut() {
-        if (!dansLesAirs) {
-            if (!terrain.collision(getX(), getY() - 10) &&
-                    !terrain.collision(getX() + largeur, getY() - 10)) {
-                velociteY = FORCE_SAUT;
-                dansLesAirs = true;
+        if (!isDansLesAirs()) {
+            if (!getTerrain().collision(getX(), getY() - 10) &&
+                    !getTerrain().collision(getX() + getLargeur(), getY() - 10)) {
+                setVelociteY(FORCE_SAUT);
+                setDansLesAirs(true);
             }
         }
     }

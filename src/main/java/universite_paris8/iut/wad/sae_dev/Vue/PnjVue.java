@@ -12,7 +12,7 @@ public class PnjVue extends PersonnageVue {
     }
 
     @Override
-    protected void chargerImages() {
+    public void chargerImages() {
         String chemin = "/universite_paris8/iut/wad/sae_dev/images/";
         this.imageD = new Image(getClass().getResource(chemin + "joueurD.gif").toExternalForm());
         this.imageG = new Image(getClass().getResource(chemin + "joueurG.gif").toExternalForm());
