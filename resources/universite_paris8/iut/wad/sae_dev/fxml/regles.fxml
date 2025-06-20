@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.effect.DropShadow?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.wad.sae_dev.Controleur.Menu">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/affichage/fondRegles.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onAction="#retournerMenu" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #ff6f91;                      -fx-background-color: linear-gradient(#ffe5ec, #ffc2d1);                      -fx-text-fill: #b3003c;                      -fx-background-radius: 12;                      -fx-border-radius: 12;                      -fx-font-size: 18px;                      -fx-cursor: hand;">
+         <effect>
+            <DropShadow color="#a6446f" offsetX="2" offsetY="2" radius="6.0" />
+         </effect>
+         <text>Retourner au menu</text>
+      </Button>
+   </children>
+</Pane>
