@@ -151,7 +151,6 @@ public class Inventaire {
             case PELOUSE -> 5;
             case COOKIE -> 3;
             case BROWNIE -> 4;
-            case PIOCHE, ARC, EPEE -> 1; // on retourne ciel pour les objets non posables
             default -> 1;
         };
     }

@@ -1,10 +1,11 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
+import java.util.*;
+
 public class BrosseADent extends Ennemi {
 
     private int compteur = 0;
-    private int distanceDetection = 200;
-    private int compteurSaut = 0; // Pour éviter les sauts répétés
+    private int distanceDetection = 300; // Distance pour activer le BFS
 
     public BrosseADent(int x, int y, Terrain terrain, Joueur joueur) {
         super(x, y, terrain, joueur, 46, 60);
@@ -15,19 +16,15 @@ public class BrosseADent extends Ennemi {
     public void seDeplacer() {
         compteur++;
 
-        // Décrémenter le compteur de saut
-        if (compteurSaut > 0) {
-            compteurSaut--;
-        }
-
-        if (compteur >= 8) {
+        // Réduire la fréquence du calcul BFS pour les performances
+        if (compteur >= 60) { // Calcul BFS toutes les 15 frames (~4 fois par seconde)
             compteur = 0;
 
             int distanceX = calculerDistanceX();
             int distanceY = calculerDistanceY();
 
             if (estJoueurProche(distanceX, distanceY)) {
-                deplacerVersJoueur(distanceX, distanceY);
+                deplacerVersJoueurBFS();
             }
         }
 
@@ -36,60 +33,133 @@ public class BrosseADent extends Ennemi {
 
     @Override
     public void deplacerVersJoueur(int distanceX, int distanceY) {
-        int nouveauX = getX();
-        int directionVoulue = 0;
+    }
 
-        // Déterminer la direction souhaitée
-        if (distanceX > 0) {
-            nouveauX += getVitesse();
-            directionVoulue = 1;
-        } else if (distanceX < 0) {
-            nouveauX -= getVitesse();
-            directionVoulue = -1;
+    /**
+     * Déplace la BrosseADent vers le joueur en utilisant l'algorithme BFS
+     */
+    public void deplacerVersJoueurBFS() {
+        Terrain terrain = getTerrain();
+
+        // Coordonnées de départ (BrosseADent)
+        int debutX = terrain.getColonne(getX());
+        int debutY = terrain.getLigne(getY());
+
+        // Coordonnées cible (Joueur)
+        int xJoueur = terrain.getColonne(getJoueur().getX());
+        int yJoueur = terrain.getLigne(getJoueur().getY());
+
+        // Dimensions du terrain
+        int ligne = terrain.ligne();
+        int colonne = terrain.colonne();
+
+        // Vérifier les limites
+        if (debutX < 0 || debutX >= colonne || debutY < 0 || debutY >= ligne ||
+                xJoueur < 0 || xJoueur >= colonne || yJoueur < 0 || yJoueur >= ligne) {
+            return;
         }
 
-        // Vérifier si le déplacement horizontal est possible
-        if (peutSeDeplacerHorizontalement(nouveauX)) {
-            setX(nouveauX);
-            setDirection(directionVoulue);
-        } else {
-            // Si bloqué et pas en l'air, essayer de sauter
-            if (!isDansLesAirs() && compteurSaut == 0) {
-                sauterObstacle();
-                compteurSaut = 30; // Éviter les sauts répétés pendant 30 frames
+        // Structures pour le BFS
+        boolean[][] visite = new boolean[ligne][colonne];
+        Map<String, int[]> parentMap = new HashMap<>();
+        Queue<int[]> queue = new LinkedList<>();
+
+        // Initialisation
+        queue.add(new int[]{debutY, debutX});
+        visite[debutY][debutX] = true;
+
+        // Directions : droite, bas, gauche, haut
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        boolean trouver = false;
+
+        // Algorithme BFS
+        while (!queue.isEmpty() && !trouver) {
+            int[] current = queue.poll();
+            int y = current[0];
+            int x = current[1];
+
+            // Vérifier si on a atteint le joueur
+            if (x == xJoueur && y == yJoueur) {
+                trouver = true;
+                break;
             }
+
+            // Explorer les 4 directions
+            for (int[] d : directions) {
+                int ny = y + d[0];
+                int nx = x + d[1];
+
+                // Vérifier les limites et les collisions
+                if (estPositionValide(nx, ny, ligne, colonne, visite, terrain)) {
+                    visite[ny][nx] = true;
+                    queue.add(new int[]{ny, nx});
+                    parentMap.put(ny + "," + nx, new int[]{y, x});
+                }
+            }
+        }
+
+        // Si aucun chemin trouvé, ne pas bouger
+        if (!trouver) {
+            return;
+        }
+
+        // Reconstruction du chemin
+        List<int[]> path = new ArrayList<>();
+        int[] curr = new int[]{yJoueur, xJoueur};
+
+        while (!(curr[0] == debutY && curr[1] == debutX)) {
+            path.add(curr);
+            String key = curr[0] + "," + curr[1];
+            if (!parentMap.containsKey(key)) {
+                break; // Sécurité pour éviter les boucles infinies
+            }
+            curr = parentMap.get(key);
+        }
+
+        Collections.reverse(path);
+
+        // Se déplacer vers la première case du chemin
+        if (!path.isEmpty()) {
+            int nextY = path.get(0)[0];
+            int nextX = path.get(0)[1];
+
+            // Convertir les coordonnées de grille en pixels et déplacer
+            int nouveauX = nextX * terrain.getTailleTuile();
+            int nouveauY = nextY * terrain.getTailleTuile();
+
+            // Déterminer la direction pour l'animation
+            if (nouveauX > getX()) {
+                setDirection(1); // Droite
+            } else if (nouveauX < getX()) {
+                setDirection(-1); // Gauche
+            }
+
+            setX(nouveauX);
+            setY(nouveauY);
         }
     }
 
     /**
-     * Vérifie si le déplacement horizontal est possible sur toute la hauteur du personnage
+     * Vérifie si une position est valide pour le BFS
      */
-    @Override
-    public boolean peutSeDeplacerHorizontalement(int nouveauX) {
-        // Vérifier les limites du terrain
-        if (nouveauX < 0 || nouveauX + getLargeur() > getTerrain().getLargeurPixels()) {
+    private boolean estPositionValide(int x, int y, int maxLigne, int maxColonne,
+                                      boolean[][] visite, Terrain terrain) {
+        // Vérifier les limites
+        if (y < 0 || y >= maxLigne || x < 0 || x >= maxColonne) {
             return false;
         }
 
-        // Vérifier les collisions sur toute la hauteur du personnage
-        int y = getY();
-        int hauteur = getHauteur();
-
-        // Vérifier plusieurs points sur la hauteur (tête, milieu, pieds)
-        for (int offsetY = 0; offsetY <= hauteur; offsetY += 10) {
-            int yTest = y + offsetY;
-            if (yTest > y + hauteur) {
-                yTest = y + hauteur;
-            }
-
-            // Vérifier collision côté gauche et droit
-            if (getTerrain().collision(nouveauX, yTest) ||
-                    getTerrain().collision(nouveauX + getLargeur(), yTest)) {
-                return false;
-            }
+        // Vérifier si déjà visité
+        if (visite[y][x]) {
+            return false;
         }
 
-        return true;
+        // Vérifier les collisions (convertir en coordonnées pixel)
+        int pixelX = x * terrain.getTailleTuile();
+        int pixelY = y * terrain.getTailleTuile();
+
+        return !terrain.collision(pixelX, pixelY);
     }
 
     public int calculerDistanceX() {
@@ -106,28 +176,6 @@ public class BrosseADent extends Ennemi {
 
         return distanceAbsX <= distanceDetection && distanceAbsY <= distanceDetection;
     }
-
-    public void sauterObstacle() {
-        // Vérifier qu'il y a de l'espace au-dessus pour sauter
-        int espaceSaut = 20; // Hauteur nécessaire pour le saut
-
-        // Vérifier l'espace au-dessus
-        boolean peutSauter = true;
-        for (int i = 1; i <= espaceSaut; i++) {
-            if (getTerrain().collision(getX(), getY() - i) ||
-                    getTerrain().collision(getX() + getLargeur(), getY() - i)) {
-                peutSauter = false;
-                break;
-            }
-        }
-
-        if (peutSauter) {
-            setVelociteY(-12.0);
-            setDansLesAirs(true);
-            System.out.println("BrosseADent saute pour éviter l'obstacle");
-        }
-    }
-
 
     @Override
     public boolean toucheJoueur() {

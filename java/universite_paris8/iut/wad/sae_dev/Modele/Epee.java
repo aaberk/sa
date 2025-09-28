@@ -1,8 +1,9 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
 public class Epee extends ObjetUtilisable {
+
     public Epee() {
-        super("Épée", Role.ARME,TypeMateriaux.EPEE);
+        super("Épée", Role.ARME, TypeMateriaux.EPEE);
     }
 
     @Override
@@ -11,20 +12,35 @@ public class Epee extends ObjetUtilisable {
         System.out.println("Épée utilisée en (" + x + ", " + y + ")");
         System.out.println("Liste ennemis : " + terrain.getListeEnnemis().size());
 
-        for (Ennemi ennemi : terrain.getListeEnnemis()) {
+        Ennemi ennemiCible = rechercherEnnemiAPortee(x, y, terrain);
 
+        if (ennemiCible != null) {
+            attaquerEnnemi(ennemiCible);
+        }
+    }
+
+    private Ennemi rechercherEnnemiAPortee(int x, int y, Terrain terrain) {
+        for (Ennemi ennemi : terrain.getListeEnnemis()) {
             int tuileX = ennemi.getX() / terrain.getTailleTuile();
             int tuileY = ennemi.getY() / terrain.getTailleTuile();
 
             System.out.println("Test ennemi en : (" + tuileX + ", " + tuileY + ")");
 
-            if (Math.abs(tuileX - x) <= 1 && Math.abs(tuileY - y) <= 1){
-                ennemi.subirDegats(1);
-                return;
+            if (estAPortee(tuileX, tuileY, x, y)) {
+                return ennemi;
             }
 
             System.out.println(ennemi.getVie());
         }
+        return null;
+    }
 
+    private boolean estAPortee(int tuileEnnemiX, int tuileEnnemiY, int tuileAttaqueX, int tuileAttaqueY) {
+        return Math.abs(tuileEnnemiX - tuileAttaqueX) <= 1 &&
+                Math.abs(tuileEnnemiY - tuileAttaqueY) <= 1;
+    }
+
+    private void attaquerEnnemi(Ennemi ennemi) {
+        ennemi.subirDegats(1);
     }
 }

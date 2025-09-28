@@ -44,16 +44,6 @@ public class Clavier implements EventHandler<KeyEvent> {
                     System.out.println("Touche saut pressée");
                     joueur.saut();
                 }
-//                case DIGIT1, NUMPAD1 -> joueur.setBlocSelectionne(1);
-//                case DIGIT2, NUMPAD2 -> joueur.setBlocSelectionne(2);
-//                case DIGIT3, NUMPAD3 -> joueur.setBlocSelectionne(3);
-//                case DIGIT4, NUMPAD4 -> joueur.setBlocSelectionne(4);
-//                case DIGIT5, NUMPAD5 -> joueur.setBlocSelectionne(5);
-//                case DIGIT6, NUMPAD6 -> joueur.setBlocSelectionne(6);
-//
-//                case N -> joueur.retirerVie();
-//                case B -> joueur.ajouterVie();
-
                 case F ->{
                     inventaire.utiliserObjetActuel(joueur, terraformer);
                     if (inventaire.getMateriauCaseSelectionne() == TypeMateriaux.ARC) {

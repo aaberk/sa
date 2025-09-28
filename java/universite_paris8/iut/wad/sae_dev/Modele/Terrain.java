@@ -207,4 +207,34 @@ public class Terrain {
             projectiles.remove(projectile);
         }
     }
+
+    // Ajoutez ces méthodes à votre classe Terrain.java
+
+    /**
+     * Convertit une coordonnée pixel X en coordonnée de colonne de grille
+     */
+    public int getColonne(int pixelX) {
+        return pixelX / TAILLE_TUILE;
+    }
+
+    /**
+     * Convertit une coordonnée pixel Y en coordonnée de ligne de grille
+     */
+    public int getLigne(int pixelY) {
+        return pixelY / TAILLE_TUILE;
+    }
+
+    /**
+     * Retourne le nombre de lignes du terrain
+     */
+    public int ligne() {
+        return hauteur();
+    }
+
+    /**
+     * Retourne le nombre de colonnes du terrain
+     */
+    public int colonne() {
+        return largeur();
+    }
 }

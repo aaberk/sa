@@ -4,6 +4,8 @@ module universite_paris8.iut.wad.sae_dev {
 
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires junit;
+    requires org.junit.jupiter.api;
 
     opens universite_paris8.iut.wad.sae_dev to javafx.fxml;
     exports universite_paris8.iut.wad.sae_dev;

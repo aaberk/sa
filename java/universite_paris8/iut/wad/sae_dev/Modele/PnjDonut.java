@@ -7,7 +7,7 @@ public class PnjDonut extends Pnj {
     private int distancePatrouille;
 
     public PnjDonut(int x, int y, Joueur joueur, Terrain terrain) {
-        super(x, y, terrain,joueur,56,56);
+        super(x, y, terrain,joueur,46,56);
         distancePatrouille = 100;
         this.limiteGauche = x - distancePatrouille;
         this.limiteDroite = x + distancePatrouille;

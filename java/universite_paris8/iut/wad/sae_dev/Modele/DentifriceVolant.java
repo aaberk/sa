@@ -9,7 +9,7 @@ public class DentifriceVolant extends Ennemi {
     private int distanceTir = 150;
 
     public DentifriceVolant(int x, int y, Terrain terrain, Joueur joueur) {
-        super(x, y, terrain, joueur, 50,50); // Commence plus haut
+        super(x, y, terrain, joueur, 46,60);
         this.joueur = joueur;
         setDansLesAirs(true);
     }
