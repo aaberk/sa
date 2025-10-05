@@ -20,7 +20,15 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.wad.sae_dev.Modele.*;
+import universite_paris8.iut.wad.sae_dev.Modele.Entites.*;
+import universite_paris8.iut.wad.sae_dev.Modele.Projectiles.FlecheArc;
+import universite_paris8.iut.wad.sae_dev.Modele.Projectiles.Projectile;
+import universite_paris8.iut.wad.sae_dev.Modele.Projectiles.ProjectileDentifrice;
 import universite_paris8.iut.wad.sae_dev.Vue.*;
+import universite_paris8.iut.wad.sae_dev.Vue.Entites.*;
+import universite_paris8.iut.wad.sae_dev.Vue.Projectiles.FlecheArcVue;
+import universite_paris8.iut.wad.sae_dev.Vue.Projectiles.ProjectileDentifriceVue;
+import universite_paris8.iut.wad.sae_dev.Vue.Projectiles.ProjectileVue;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,7 +71,7 @@ public class Controleur implements Initializable {
     private PnjJakeVue pnjJakeVue;
     private PnjDonutVue pnjDonutVue;
     private BrosseADentVue brosseADentVue;
-    private DentifriceVolantVue DentifriceVolantVue;
+    private universite_paris8.iut.wad.sae_dev.Vue.Entites.DentifriceVolantVue DentifriceVolantVue;
     private ImageView gameOverImageView;
 
     private InventaireVue inventaireVue;

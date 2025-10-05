@@ -17,7 +17,7 @@ public class Menu {
     private void lancerJeu(ActionEvent event) throws IOException {
         System.out.println("Lancer Jeu");
         Terrain terrain = new Terrain();
-        int largeurFenetre = terrain.getLargeurPixels();
+        int largeurFenetre = terrain.largeurEnPixels();
         int hauteurFenetre = terrain.getHauteurPixels();
 
         changerScene(event, "/universite_paris8/iut/wad/sae_dev/fxml/jeu.fxml", largeurFenetre, hauteurFenetre);

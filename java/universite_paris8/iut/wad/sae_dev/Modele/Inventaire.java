@@ -1,5 +1,8 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
+import universite_paris8.iut.wad.sae_dev.Modele.Entites.Joueur;
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.ObjetUtilisable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -10,8 +10,9 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.wad.sae_dev.Modele.*;
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.ObjetUtilisable;
 import universite_paris8.iut.wad.sae_dev.Vue.InventaireVue;
-import universite_paris8.iut.wad.sae_dev.Vue.JoueurVue;
+import universite_paris8.iut.wad.sae_dev.Vue.Entites.JoueurVue;
 import universite_paris8.iut.wad.sae_dev.Vue.TerrainVue;
 
 public class Souris implements EventHandler<MouseEvent> {

@@ -6,10 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import universite_paris8.iut.wad.sae_dev.Modele.Inventaire;
-import universite_paris8.iut.wad.sae_dev.Modele.Joueur;
+import universite_paris8.iut.wad.sae_dev.Modele.Entites.Joueur;
 import universite_paris8.iut.wad.sae_dev.Modele.Terraformer;
 import universite_paris8.iut.wad.sae_dev.Modele.TypeMateriaux;
-import universite_paris8.iut.wad.sae_dev.Vue.JoueurVue;
+import universite_paris8.iut.wad.sae_dev.Vue.Entites.JoueurVue;
 
 public class Clavier implements EventHandler<KeyEvent> {
 

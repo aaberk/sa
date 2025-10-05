@@ -4,7 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import universite_paris8.iut.wad.sae_dev.Modele.Joueur;
+import universite_paris8.iut.wad.sae_dev.Modele.Entites.Joueur;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,11 @@
 package universite_paris8.iut.wad.sae_dev.Vue;
 
 import javafx.scene.layout.TilePane;
-import universite_paris8.iut.wad.sae_dev.Modele.Projectile;
+import universite_paris8.iut.wad.sae_dev.Modele.Projectiles.Projectile;
 import universite_paris8.iut.wad.sae_dev.Modele.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import universite_paris8.iut.wad.sae_dev.Vue.Projectiles.ProjectileVue;
 
 import java.util.ArrayList;
 import java.util.Iterator;

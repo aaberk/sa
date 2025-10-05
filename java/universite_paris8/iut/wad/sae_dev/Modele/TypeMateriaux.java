@@ -1,5 +1,10 @@
 package universite_paris8.iut.wad.sae_dev.Modele;
 
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.Arc;
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.Epee;
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.ObjetUtilisable;
+import universite_paris8.iut.wad.sae_dev.Modele.Utilisables.Pioche;
+
 public enum TypeMateriaux {
     COOKIE(null,Role.CONSTRUCTION),
     PIOCHE(new Pioche(),Role.OUTIL),

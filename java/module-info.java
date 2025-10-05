@@ -13,4 +13,10 @@ module universite_paris8.iut.wad.sae_dev {
     opens universite_paris8.iut.wad.sae_dev.Modele to javafx.fxml;
     exports universite_paris8.iut.wad.sae_dev.Controleur;
     opens universite_paris8.iut.wad.sae_dev.Controleur to javafx.fxml;
+    exports universite_paris8.iut.wad.sae_dev.Modele.Entites;
+    opens universite_paris8.iut.wad.sae_dev.Modele.Entites to javafx.fxml;
+    exports universite_paris8.iut.wad.sae_dev.Modele.Utilisables;
+    opens universite_paris8.iut.wad.sae_dev.Modele.Utilisables to javafx.fxml;
+    exports universite_paris8.iut.wad.sae_dev.Modele.Projectiles;
+    opens universite_paris8.iut.wad.sae_dev.Modele.Projectiles to javafx.fxml;
 }

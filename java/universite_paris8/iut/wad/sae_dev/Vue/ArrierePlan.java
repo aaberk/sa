@@ -21,7 +21,7 @@ public class ArrierePlan {
             Image backgroundImage = new Image(getClass().getResource("/universite_paris8/iut/wad/sae_dev/images/background.png").toExternalForm());
             backgroundImageView = new ImageView(backgroundImage);
 
-            backgroundImageView.setFitWidth(terrain.getLargeurPixels());
+            backgroundImageView.setFitWidth(terrain.largeurEnPixels());
             backgroundImageView.setFitHeight(terrain.getHauteurPixels());
 
 
